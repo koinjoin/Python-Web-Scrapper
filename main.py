@@ -9,6 +9,10 @@ indeed = requests.get('https://www.indeed.com/jobs?as_and=python&as_phr&as_any&a
 # print(indeed.text) 
 # all the html...
 
-res_indeed = indeed.text
-soup_indeed = BeautifulSoup(res_indeed, 'html.parser')
-print(soup_indeed.find_all('ul', {"class":"pagination-list"})) #class 키워드와의 충돌을 피하기 위해 '_'사용
+indeed_html = indeed.text
+indeed_soup = BeautifulSoup(indeed_html, 'html.parser')
+indeed_pagination = indeed_soup.find('ul', {"class":"pagination-list"}) 
+indeed_pages = indeed_pagination.find_all('a')
+indeed_pageNumber = indeed_pagination.find_all('span', {"class":"pn"})[:-1] #마지막은 제외
+print(indeed_pageNumber)
+
