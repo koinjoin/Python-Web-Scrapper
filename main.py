@@ -11,5 +11,4 @@ indeed = requests.get('https://www.indeed.com/jobs?as_and=python&as_phr&as_any&a
 
 res_indeed = indeed.text
 soup_indeed = BeautifulSoup(res_indeed, 'html.parser')
-print(soup_indeed.title)
-print(soup_indeed.title.string)
+print(soup_indeed.find_all('ul', {"class":"pagination-list"})) #class 키워드와의 충돌을 피하기 위해 '_'사용
