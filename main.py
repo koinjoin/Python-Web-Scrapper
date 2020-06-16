@@ -15,8 +15,7 @@ indeed_pagination = indeed_soup.find('ul', {"class":"pagination-list"})
 indeed_pageLink = indeed_pagination.find_all('a')
 pages = []
 for link in indeed_pageLink[:-1]:
-    pages.append(link.find('span', {'class':'pn'}).string)
+    pages.append(int(link.string))
+indeed_maxPage = pages[-1]
 
-
-print(pages)
 
