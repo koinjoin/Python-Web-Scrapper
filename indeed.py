@@ -5,7 +5,7 @@ LIMIT = 50
 URL = f'https://www.indeed.com/jobs?q=python&limit={LIMIT}'
 
 def extractPages():
-    response = requests.get(URL, auth=('user', 'pass'))
+    response = requests.get(URL)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
     pagination = soup.find('ul', {"class":"pagination-list"}) 
@@ -18,6 +18,14 @@ def extractPages():
     
 def extractJobs(last_page):
     for page in range(last_page):
-        response = requests.get(f'{URL}&start={page*LIMIT}', auth=('user', 'pass'))
-        print(response.status_code)
+        print(extractJob(f'{URL}&start={page*LIMIT}'))
 
+def extractJob(url):
+    response = requests.get(url)
+    html = response.text
+    soup = BeautifulSoup(html, 'html.parser')
+    jobList = soup.find_all('div', {'class':'jobsearch-SerpJobCard'})
+    for job in jobList:
+        title = job.find('h2', {'class':'title'}).find('a')
+        print(title['title'])
+    
