@@ -18,5 +18,5 @@ def extractPages():
     
 def extractJobs(last_page):
     for page in range(last_page):
-        print(f'start={page*50}')
+        print(f'start={page*LIMIT}')
 
