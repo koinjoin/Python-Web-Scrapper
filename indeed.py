@@ -18,5 +18,6 @@ def extractPages():
     
 def extractJobs(last_page):
     for page in range(last_page):
-        print(f'start={page*LIMIT}')
+        response = requests.get(f'{URL}&start={page*LIMIT}', auth=('user', 'pass'))
+        print(response.status_code)
 
