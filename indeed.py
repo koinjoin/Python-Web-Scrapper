@@ -8,7 +8,7 @@ def extractPages():
     response = requests.get(URL)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
-    pagination = soup.find('ul', {"class":"pagination-list"}) 
+    pagination = soup.find('ul', {'class':"pagination-list"}) 
     pageLink = pagination.find_all('a')
     pages = []
     for link in pageLink[:-1]:
@@ -25,7 +25,17 @@ def extractJob(url):
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
     jobList = soup.find_all('div', {'class':'jobsearch-SerpJobCard'})
+    titleList = []
+    compList = []
     for job in jobList:
         title = job.find('h2', {'class':'title'}).find('a')
-        print(title['title'])
+        company = job.find('span',{'class':'company'})
+        if company.string==None:
+            compName = company.find('a').string
+        else:
+            compName = company.string
+        titleList.append(title['title'])
+        compList.append(compName.strip())
+    print(titleList)
+    print(compList)
     
