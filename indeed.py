@@ -28,14 +28,18 @@ def extractJob(url):
     titleList = []
     compList = []
     for job in jobList:
-        title = job.find('h2', {'class':'title'}).find('a')
-        company = job.find('span',{'class':'company'})
-        if company.string==None:
-            compName = company.find('a').string
-        else:
-            compName = company.string
-        titleList.append(title['title'])
-        compList.append(compName.strip())
-    print(titleList)
-    print(compList)
-    
+        print(extractData(job))
+
+def extractData(jobSoup):
+    titleLink = jobSoup.find('h2', {'class':'title'}).find('a')
+    title = titleLink['title']
+    company = jobSoup.find('span',{'class':'company'})
+    if company.string is None:
+        compName = company.find('a').string
+    else:
+        compName = company.string
+    compName = compName.strip()
+    locationBox = jobSoup.find('div',{'class':'recJobLoc'})
+    location = locationBox['data-rc-loc']
+    job_id = jobSoup['data-jk']
+    return {'title':title, 'company':compName, 'location':location, 'id':job_id}
