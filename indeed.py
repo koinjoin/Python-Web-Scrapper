@@ -42,4 +42,4 @@ def extractData(jobSoup):
     locationBox = jobSoup.find('div',{'class':'recJobLoc'})
     location = locationBox['data-rc-loc']
     job_id = jobSoup['data-jk']
-    return {'title':title, 'company':compName, 'location':location, 'id':job_id}
+    return {'title':title, 'company':compName, 'location':location, 'link':f'https://www.indeed.com/viewjob?jk={job_id}'}
