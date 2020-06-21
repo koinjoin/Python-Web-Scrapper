@@ -10,15 +10,20 @@ def extractPages():
     soup = BeautifulSoup(html, 'html.parser')
     pagination = soup.find('ul', {'class':"pagination-list"}) 
     pageLink = pagination.find_all('a')
-    pages = []
-    for link in pageLink[:-1]:
-        pages.append(int(link.string))
-    last_page = pages[-1]
+    last_page = int(pageLink[-2].string)
     return last_page
     
 def extractJobs(last_page):
+    jobs = []
     for page in range(last_page):
-        print(extractJob(f'{URL}&start={page*LIMIT}'))
+        print(f'Scrapping {page+1}')
+        response = requests.get(f'{URL}&start={page*LIMIT}')
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')
+        jobList = soup.find_all('div', {'class':'jobsearch-SerpJobCard'})
+        for job in jobList:
+            jobs.append(extractData(job))
+        print(f'Total: {len(jobs)} jobs extracted')
 
 def extractJob(url):
     response = requests.get(url)
@@ -43,3 +48,6 @@ def extractData(jobSoup):
     location = locationBox['data-rc-loc']
     job_id = jobSoup['data-jk']
     return {'title':title, 'company':compName, 'location':location, 'link':f'https://www.indeed.com/viewjob?jk={job_id}'}
+
+def startScrap():
+    extractJobs(extractPages())
