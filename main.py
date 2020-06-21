@@ -1,4 +1,6 @@
 import indeed
+import stackoverflow as stf
 
 
-indeed.startScrap()
+# indeed.startScrap()
+stf.getLastPage()
