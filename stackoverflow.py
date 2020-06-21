@@ -14,7 +14,7 @@ def getLastPage():
 
 def extractJobs(last_page):
     jobs = []
-    for page in range(1):
+    for page in range(last_page):
         print(f'Scrapping {page+1}')
         response = requests.get(f'{URL}&pg={page+1}')
         html = response.text
@@ -32,8 +32,8 @@ def extractData(jobSoup):
     company = jobSoup.find('h3', {'class':'mb4'})
     compName = company.find('span').get_text(strip=True)
     location = company.find('span',{'class':'fc-black-500'}).get_text(strip=True)
-    print({'title':title, 'company':compName, 'location':location})
-    return {'title':title, 'company':compName, 'location':location}
+    job_id = jobSoup['data-result-id']
+    return {'title':title, 'company':compName, 'location':location, 'link':f'https://stackoverflow.com/jobs/{job_id}'}
 
 def startScrap():
     last_page = getLastPage()
