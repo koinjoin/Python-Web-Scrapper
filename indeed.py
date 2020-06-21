@@ -25,16 +25,6 @@ def extractJobs(last_page):
             jobs.append(extractData(job))
         print(f'Total: {len(jobs)} jobs extracted')
 
-def extractJob(url):
-    response = requests.get(url)
-    html = response.text
-    soup = BeautifulSoup(html, 'html.parser')
-    jobList = soup.find_all('div', {'class':'jobsearch-SerpJobCard'})
-    titleList = []
-    compList = []
-    for job in jobList:
-        print(extractData(job))
-
 def extractData(jobSoup):
     titleLink = jobSoup.find('h2', {'class':'title'}).find('a')
     title = titleLink['title']
