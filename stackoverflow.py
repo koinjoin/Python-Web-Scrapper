@@ -10,6 +10,4 @@ def getLastPage():
     pagination = soup.find('div', {'class':"s-pagination"}) 
     pageLink = pagination.find_all('a', {'class':'s-pagination--item'})
     last_page = int(pageLink[-2].find('span').string)
-    print(pagination)
-    print(last_page)
     return last_page
