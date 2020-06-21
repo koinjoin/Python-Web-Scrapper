@@ -40,4 +40,5 @@ def extractData(jobSoup):
     return {'title':title, 'company':compName, 'location':location, 'link':f'https://www.indeed.com/viewjob?jk={job_id}'}
 
 def startScrap():
-    extractJobs(getLastPage())
+    last_page = getLastPage()
+    extractJobs(last_page)
