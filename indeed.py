@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 LIMIT = 50
 URL = f'https://www.indeed.com/jobs?q=python&limit={LIMIT}'
 
-def extractPages():
+def getLastPage():
     response = requests.get(URL)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
@@ -40,4 +40,4 @@ def extractData(jobSoup):
     return {'title':title, 'company':compName, 'location':location, 'link':f'https://www.indeed.com/viewjob?jk={job_id}'}
 
 def startScrap():
-    extractJobs(extractPages())
+    extractJobs(getLastPage())
