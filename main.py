@@ -3,4 +3,4 @@ import stackoverflow as stf
 
 
 # indeed.startScrap()
-stf.getLastPage()
+stf.startScrap()
