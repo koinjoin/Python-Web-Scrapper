@@ -24,6 +24,7 @@ def extractJobs(last_page):
         for job in jobList:
             jobs.append(extractData(job))
         print(f'Total: {len(jobs)} jobs extracted')
+    return jobs
 
 def extractData(jobSoup):
     titleLink = jobSoup.find('h2', {'class':'title'}).find('a')
@@ -41,4 +42,4 @@ def extractData(jobSoup):
 
 def startScrap():
     last_page = getLastPage()
-    extractJobs(last_page)
+    return extractJobs(last_page)

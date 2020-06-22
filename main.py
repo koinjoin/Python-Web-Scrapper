@@ -1,6 +1,6 @@
-import indeed
+import indeed as ind
 import stackoverflow as stf
 
 
-indeed.startScrap()
-stf.startScrap()
+ind_jobs = ind.startScrap()
+stf_jobs = stf.startScrap()
