@@ -16,7 +16,7 @@ def getLastPage():
 def extractJobs(last_page):
     jobs = []
     for page in range(last_page):
-        print(f'Scrapping {page+1}')
+        print(f'Scrapping Indeed.com {page+1}')
         response = requests.get(f'{URL}&start={page*LIMIT}')
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
