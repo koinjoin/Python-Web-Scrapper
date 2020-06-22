@@ -15,7 +15,7 @@ def getLastPage():
     
 def extractJobs(last_page):
     jobs = []
-    for page in range(1):
+    for page in range(last_page):
         print(f'Scrapping Indeed.com {page+1}')
         response = requests.get(f'{URL}&start={page*LIMIT}')
         html = response.text
