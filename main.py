@@ -19,4 +19,9 @@ def result():
     searchedJob = request.args.get('job')
     
     return render_template("result.html",searched=searchedJob) #인자를 넘겨서 템플릿을 구성 => soSexxxy
-app.run(debug=True)
+
+print(__name__)
+if __name__=="__main__":
+    app.run(debug=True)
+
+    
