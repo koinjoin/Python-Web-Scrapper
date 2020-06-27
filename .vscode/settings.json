@@ -1,4 +1,5 @@
 {
     "editor.formatOnSave": true,
-    "terminal.integrated.cursorStyle": "line"
+    "terminal.integrated.cursorStyle": "line",
+    "python.formatting.provider": "black",
 }
