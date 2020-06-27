@@ -1,7 +1,7 @@
 import indeed as ind
 import stackoverflow as stf
 import save
-from flask import Flask
+from flask import Flask, render_template, request
 
 # ind_jobs = ind.startScrap()
 # stf_jobs = stf.startScrap()
@@ -12,6 +12,11 @@ app = Flask("myScrapper")
 
 @app.route("/")
 def home():
-    return "Hello People"
+    return render_template("home.html")
 
-app.run()
+@app.route("/result")
+def result():
+    searchedJob = request.args.get('job')
+    
+    return render_template("result.html",searched=searchedJob) #인자를 넘겨서 템플릿을 구성 => soSexxxy
+app.run(debug=True)
