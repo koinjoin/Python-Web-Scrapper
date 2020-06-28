@@ -1,10 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = f'https://stackoverflow.com/jobs?q=python'
+def getUrl(keyword):
+    return f'https://stackoverflow.com/jobs?q={keyword}'
 
-def getLastPage():
-    response = requests.get(URL)
+def getLastPage(url):
+    response = requests.get(url)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
     pagination = soup.find('div', {'class':"s-pagination"}) 
@@ -12,11 +13,11 @@ def getLastPage():
     last_page = int(pageLink[-2].find('span').string)
     return last_page
 
-def extractJobs(last_page):
+def extractJobs(url, last_page):
     jobs = []
     for page in range(last_page):
         print(f'Scrapping Stackoverflow.com {page+1}')
-        response = requests.get(f'{URL}&pg={page+1}')
+        response = requests.get(f'{url}&pg={page+1}')
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
         jobList = soup.find_all('div', {'class':'-job'})
@@ -36,7 +37,8 @@ def extractData(jobSoup):
     job_id = jobSoup['data-result-id']
     return {'title':title, 'company':compName, 'location':location, 'link':f'https://stackoverflow.com/jobs/{job_id}'}
 
-def startScrap():
-    last_page = getLastPage()
-    return extractJobs(last_page)
+def startScrap(keyword):
+    url = getUrl(keyword)
+    last_page = getLastPage(url)
+    return extractJobs(url, last_page)
 
