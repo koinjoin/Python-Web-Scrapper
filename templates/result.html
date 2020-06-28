@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Result for '{{searched}}'</title>
 </head>
+
 <body>
-    <a href="/"><h1>Jobkipedia</h1></a>
+    <a href="/">
+        <h1>Jobkipedia</h1>
+    </a>
     <form action="/result" method="get">
         <input type="text" name="job" placeholder="Search a job" required>
         <button type="submit">Search</button>
     </form>
     <h1>Results for {{searched}} ...</h1>
+    <ul>
+        {% for sr in searchResult %}
+        <li>
+            <h2>{{sr['title']}}</h2>
+            <h3>{{sr['company']}}</h3>
+            <h4>{{sr['location']}}</h4>
+            <a href="{{sr['link']}}">Go!</a>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
+
 </html>
