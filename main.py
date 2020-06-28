@@ -27,7 +27,7 @@ def result():
             searchResult = ind.startScrap(searchedJob)
             db[searchedJob]=searchResult
         return render_template(
-            "result.html", searched=searchedJob, searchResult=searchResult
+            "result.html", searched=searchedJob, searchResult=searchResult, num=len(searchResult)
         )  # 인자를 넘겨서 템플릿을 구성 => soSexxxy
     else:
         return redirect("/")

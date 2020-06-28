@@ -34,10 +34,16 @@ def extractData(jobSoup):
     if (company is None):
         compName = "None"
     elif (company.string is None):
-        compName = company.find('a').string
+        if company.find('a') is None:
+            compName = "None"
+        else:
+            compName = company.find('a').string
     else:
         compName = company.string
-    compName = compName.strip()
+    if compName is None:
+        pass
+    else:
+        compName = compName.strip()
     locationBox = jobSoup.find('div',{'class':'recJobLoc'})
     location = locationBox['data-rc-loc']
     job_id = jobSoup['data-jk']

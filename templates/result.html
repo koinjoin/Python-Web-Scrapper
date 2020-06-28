@@ -16,7 +16,7 @@
         <input type="text" name="job" placeholder="Search a job" required>
         <button type="submit">Search</button>
     </form>
-    <h1>{{len(searchResult)}} Results for {{searched}} ...</h1>
+    <h1>{{num}} Results for {{searched}} ...</h1>
     <ul>
         {% for sr in searchResult %}
         <li>
