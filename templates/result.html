@@ -17,6 +17,7 @@
         <button type="submit">Search</button>
     </form>
     <h1>{{num}} Results for {{searched}} ...</h1>
+    <a href="/export?job={{searched}}">save file</a>
     <ul>
         {% for sr in searchResult %}
         <li>

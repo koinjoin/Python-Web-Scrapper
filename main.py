@@ -2,6 +2,7 @@ import indeed as ind
 import stackoverflow as stf
 import save
 from flask import Flask, render_template, request, redirect
+from exporter import save
 
 # ind_jobs = ind.startScrap("python")
 # stf_jobs = stf.startScrap("python")
@@ -24,7 +25,7 @@ def result():
         if fromDb:
             searchResult = fromDb
         else:
-            searchResult = ind.startScrap(searchedJob)
+            searchResult = stf.startScrap(searchedJob)
             db[searchedJob]=searchResult
         return render_template(
             "result.html", searched=searchedJob, searchResult=searchResult, num=len(searchResult)
@@ -32,6 +33,19 @@ def result():
     else:
         return redirect("/")
 
+@app.route("/export")
+def export():
+    try:
+        job = request.args.get('job')
+        if not job:
+            raise Exception()
+        jobs = db.get(job)
+        if not jobs:
+            raise Exception()
+        save(jobs, job)
+        return redirect("/")
+    except:
+        return redirect("/")
 
 print(__name__)
 if __name__ == "__main__":
